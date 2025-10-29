@@ -4,14 +4,16 @@ cat > index.html << 'EOF'
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reforma Segura - Monitoreo en Tiempo Real</title>
+    <title>Reforma Segura - ALERTA MÁXIMA</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
         
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: #0d1117;
+            background: linear-gradient(-45deg, #7f1d1d, #991b1b, #dc2626, #ef4444);
+            background-size: 400% 400%;
+            animation: gradientShift 8s ease infinite;
             color: white;
             margin: 0;
             padding: 0;
@@ -19,86 +21,8 @@ cat > index.html << 'EOF'
             overflow-x: hidden;
         }
 
-        .animated-background {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            background: linear-gradient(-45deg, #0d1117, #1a2029, #1e293b, #334155);
-            background-size: 400% 400%;
-            animation: gradientShift 15s ease infinite;
-        }
-
-        .animated-background::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(16, 185, 129, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 40% 40%, rgba(239, 68, 68, 0.05) 0%, transparent 50%);
-            animation: pulseGlow 8s ease-in-out infinite;
-        }
-
-        .floating-shapes {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-        }
-
-        .shape {
-            position: absolute;
-            opacity: 0.1;
-            animation: float 20s infinite linear;
-        }
-
-        .shape:nth-child(1) {
-            top: 10%;
-            left: 10%;
-            width: 100px;
-            height: 100px;
-            background: linear-gradient(45deg, #3b82f6, #10b981);
-            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
-            animation-delay: 0s;
-        }
-
-        .shape:nth-child(2) {
-            top: 60%;
-            left: 80%;
-            width: 150px;
-            height: 150px;
-            background: linear-gradient(45deg, #ef4444, #f59e0b);
-            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
-            animation-delay: -5s;
-            animation-duration: 25s;
-        }
-
-        .shape:nth-child(3) {
-            top: 80%;
-            left: 20%;
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(45deg, #8b5cf6, #ec4899);
-            border-radius: 50% 50% 50% 50% / 60% 40% 60% 40%;
-            animation-delay: -10s;
-            animation-duration: 30s;
-        }
-
-        .shape:nth-child(4) {
-            top: 30%;
-            left: 70%;
-            width: 120px;
-            height: 120px;
-            background: linear-gradient(45deg, #10b981, #3b82f6);
-            border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
-            animation-delay: -15s;
-            animation-duration: 35s;
+        .alert-pulse {
+            animation: alertPulse 2s ease-in-out infinite;
         }
 
         @keyframes gradientShift {
@@ -107,27 +31,9 @@ cat > index.html << 'EOF'
             100% { background-position: 0% 50%; }
         }
 
-        @keyframes pulseGlow {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.8; }
-        }
-
-        @keyframes float {
-            0% {
-                transform: translate(0, 0) rotate(0deg);
-            }
-            25% {
-                transform: translate(100px, 50px) rotate(90deg);
-            }
-            50% {
-                transform: translate(200px, -50px) rotate(180deg);
-            }
-            75% {
-                transform: translate(-100px, 100px) rotate(270deg);
-            }
-            100% {
-                transform: translate(0, 0) rotate(360deg);
-            }
+        @keyframes alertPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
         }
 
         .content-wrapper {
@@ -136,9 +42,9 @@ cat > index.html << 'EOF'
         }
 
         .card {
-            background: rgba(22, 27, 34, 0.8);
+            background: rgba(127, 29, 29, 0.9);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(239, 68, 68, 0.5);
             border-radius: 16px;
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
             position: relative;
@@ -151,7 +57,7 @@ cat > index.html << 'EOF'
             left: 0;
             right: 0;
             height: 4px;
-            background: linear-gradient(90deg, #3b82f6, #10b981);
+            background: linear-gradient(90deg, #ef4444, #dc2626);
             border-radius: 16px 16px 0 0;
         }
         
@@ -161,26 +67,14 @@ cat > index.html << 'EOF'
             border-radius: 16px;
             overflow: hidden;
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .pulse {
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0% { opacity: 1; }
-            50% { opacity: 0.5; }
-            100% { opacity: 1; }
+            border: 2px solid rgba(239, 68, 68, 0.5);
         }
         
         .verified-badge {
-            background: linear-gradient(135deg, #10b981, #059669);
+            background: linear-gradient(135deg, #dc2626, #991b1b);
         }
 
-        .traffic-low { color: #10b981; }
-        .traffic-medium { color: #f59e0b; }
-        .traffic-high { color: #ef4444; }
+        .traffic-high { color: #fef2f2; font-weight: 900; }
     </style>
     
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
@@ -189,91 +83,81 @@ cat > index.html << 'EOF'
 </head>
 
 <body class="p-4 md:p-8 min-h-screen">
-    <!-- Fondo animado -->
-    <div class="animated-background">
-        <div class="floating-shapes">
-            <div class="shape"></div>
-            <div class="shape"></div>
-            <div class="shape"></div>
-            <div class="shape"></div>
-        </div>
-    </div>
-
     <!-- Contenido principal -->
     <div class="content-wrapper max-w-7xl mx-auto">
-        <header class="mb-8 text-center">
-            <h1 class="text-4xl md:text-6xl font-extrabold bg-gradient-to-r from-green-500 to-blue-500 bg-clip-text text-transparent mt-4">
-                Reforma Segura
+        <header class="mb-8 text-center alert-pulse">
+            <h1 class="text-4xl md:text-6xl font-extrabold bg-gradient-to-r from-red-200 to-red-100 bg-clip-text text-transparent mt-4">
+                ⚠️ ALERTA MÁXIMA
             </h1>
-            <p class="text-lg md:text-xl text-gray-300 mt-2 max-w-3xl mx-auto">
-                Monitoreo en tiempo real - Paseo de la Reforma y áreas aledañas
-                <span id="status-container" class="inline-flex items-center px-3 py-1 rounded-full text-sm bg-orange-500 text-white ml-2">
+            <p class="text-lg md:text-xl text-red-100 mt-2 max-w-3xl mx-auto">
+                MEGAMARCHA DE TRANSPORTISTAS - MIÉRCOLES 29 OCT 2025
+                <span id="status-container" class="inline-flex items-center px-3 py-1 rounded-full text-sm bg-red-800 text-white ml-2">
                     <i data-lucide="alert-triangle" class="w-3 h-3 mr-1"></i>
-                    <span id="status-text">Manifestación Activa</span>
+                    <span id="status-text">CÓDIGO ROJO ACTIVO</span>
                 </span>
             </p>
             <div class="mt-4">
-                <div class="text-lg bg-gray-800/80 backdrop-blur-sm rounded-lg px-4 py-2 inline-block border border-gray-700" id="real-time-clock">--:--:--</div>
+                <div class="text-lg bg-red-900/80 backdrop-blur-sm rounded-lg px-4 py-2 inline-block border border-red-700" id="real-time-clock">--:--:--</div>
             </div>
         </header>
 
-        <!-- Área de búsqueda -->
-        <div class="card p-4 mb-6 bg-orange-500/20 border border-orange-500/30">
+        <!-- Alerta principal -->
+        <div class="card p-4 mb-6 bg-red-800/50 border border-red-500 alert-pulse">
             <div class="flex items-center justify-between">
                 <div class="flex items-center space-x-3">
-                    <i data-lucide="alert-triangle" class="w-5 h-5 text-orange-400"></i>
+                    <i data-lucide="alert-octagon" class="w-6 h-6 text-red-300"></i>
                     <div>
-                        <p class="font-semibold">⚠️ Manifestación Activa Reportada - 2:00 PM</p>
-                        <p class="text-sm text-gray-400">Paseo de la Reforma frente al Ángel - Tráfico afectado</p>
+                        <p class="font-semibold text-lg">🚨 MEGAMARCHA FAT - 15:00 HORAS</p>
+                        <p class="text-sm text-red-200">Fuerza Amplia de Transportistas - Miles de unidades movilizadas</p>
                     </div>
                 </div>
                 <div class="text-right">
-                    <p class="text-sm font-mono">19.4269, -99.1678</p>
-                    <p class="text-xs text-gray-400">Ángel de la Independencia</p>
+                    <p class="text-sm font-mono text-red-200">29 OCT 2025</p>
+                    <p class="text-xs text-red-300">14:00 - 19:00 HORAS</p>
                 </div>
             </div>
         </div>
 
         <div class="card p-6 mb-8">
             <h2 class="text-2xl font-semibold mb-4 text-white flex items-center">
-                <i data-lucide="activity" class="w-6 h-6 mr-2 text-orange-400"></i>
-                Estado del Área - Tiempo Real
+                <i data-lucide="activity" class="w-6 h-6 mr-2 text-red-300"></i>
+                ESTADO DE EMERGENCIA - ÁREA REFORMA
             </h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                <div class="bg-gradient-to-br from-orange-500 to-orange-600 p-4 rounded-xl text-white">
+                <div class="bg-gradient-to-br from-red-800 to-red-900 p-4 rounded-xl text-white">
                     <div class="flex justify-between items-center">
                         <div>
                             <p class="text-sm opacity-90">Estado Tráfico</p>
-                            <p class="text-2xl font-bold" id="traffic-status">Congestionado</p>
+                            <p class="text-2xl font-bold traffic-high">COLAPSADO</p>
                         </div>
-                        <i data-lucide="car" class="w-8 h-8"></i>
+                        <i data-lucide="car" class="w-8 h-8 text-red-200"></i>
                     </div>
                 </div>
-                <div class="bg-gradient-to-br from-green-500 to-green-600 p-4 rounded-xl text-white">
+                <div class="bg-gradient-to-br from-red-800 to-red-900 p-4 rounded-xl text-white">
                     <div class="flex justify-between items-center">
                         <div>
-                            <p class="text-sm opacity-90">Fuentes Activas</p>
-                            <p class="text-2xl font-bold" id="sources-count">3</p>
+                            <p class="text-sm opacity-90">Bloqueos Activos</p>
+                            <p class="text-2xl font-bold">8+</p>
                         </div>
-                        <i data-lucide="radio" class="w-8 h-8"></i>
+                        <i data-lucide="shield-alert" class="w-8 h-8 text-red-200"></i>
                     </div>
                 </div>
-                <div class="bg-gradient-to-br from-red-500 to-red-600 p-4 rounded-xl text-white">
+                <div class="bg-gradient-to-br from-red-800 to-red-900 p-4 rounded-xl text-white">
                     <div class="flex justify-between items-center">
                         <div>
-                            <p class="text-sm opacity-90">Incidentes Hoy</p>
-                            <p class="text-2xl font-bold" id="reports-count">1</p>
+                            <p class="text-sm opacity-90">Unidades Movilizadas</p>
+                            <p class="text-2xl font-bold">2K+</p>
                         </div>
-                        <i data-lucide="alert-triangle" class="w-8 h-8"></i>
+                        <i data-lucide="bus" class="w-8 h-8 text-red-200"></i>
                     </div>
                 </div>
-                <div class="bg-gradient-to-br from-purple-500 to-purple-600 p-4 rounded-xl text-white">
+                <div class="bg-gradient-to-br from-red-800 to-red-900 p-4 rounded-xl text-white">
                     <div class="flex justify-between items-center">
                         <div>
-                            <p class="text-sm opacity-90">Última Verificación</p>
-                            <p class="text-lg font-bold" id="last-update">--:--:--</p>
+                            <p class="text-sm opacity-90">Horario Crítico</p>
+                            <p class="text-lg font-bold">14:00-19:00</p>
                         </div>
-                        <i data-lucide="clock" class="w-8 h-8"></i>
+                        <i data-lucide="clock" class="w-8 h-8 text-red-200"></i>
                     </div>
                 </div>
             </div>
@@ -285,79 +169,152 @@ cat > index.html << 'EOF'
 
         <section class="card p-6">
             <h2 class="text-2xl font-semibold mb-4 text-white flex items-center">
-                <i data-lucide="alert-circle" class="w-6 h-6 mr-2 text-orange-400"></i>
-                Eventos Confirmados en el Área
-                <span class="absolute top-0 right-0 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs -mt-2 -mr-2" id="total-count">1</span>
+                <i data-lucide="alert-circle" class="w-6 h-6 mr-2 text-red-300"></i>
+                INFORMACIÓN CRÍTICA - BLOQUEOS CONFIRMADOS
+                <span class="absolute top-0 right-0 bg-red-800 text-white rounded-full w-8 h-8 flex items-center justify-center text-xs -mt-2 -mr-2">8</span>
             </h2>
             <div id="reports-list" class="space-y-4">
-                <div class="p-4 rounded-lg border-l-4 border-red-500 bg-red-500/10">
+                <div class="p-4 rounded-lg border-l-4 border-red-500 bg-red-800/50">
                     <div class="flex justify-between items-start">
                         <div class="flex-1">
                             <div class="flex items-center mb-2">
-                                <h3 class="font-semibold text-lg">Paseo de la Reforma - Ángel de la Independencia</h3>
+                                <h3 class="font-semibold text-lg">🚨 PUNTO INICIAL: Monumento a la Revolución</h3>
                                 <span class="ml-2 px-2 py-1 verified-badge text-white rounded-full text-xs font-medium">
-                                    Confirmado
-                                </span>
-                                <span class="ml-2 px-2 py-1 bg-orange-500 text-white rounded-full text-xs font-medium">
-                                    C5 CDMX
+                                    CONFIRMADO
                                 </span>
                             </div>
-                            <p class="text-gray-300">Manifestación por derechos laborales - Aproximadamente 300 personas. Tráfico congestionado en ambas direcciones.</p>
-                            <div class="flex items-center mt-2 text-sm text-gray-400">
+                            <p class="text-red-100">Concentración principal - Miles de transportistas</p>
+                            <div class="flex items-center mt-2 text-sm text-red-200">
                                 <i data-lucide="clock" class="w-4 h-4 mr-1"></i>
-                                <span id="protest-time">--:--</span>
+                                <span>Desde 14:00 horas</span>
                                 <span class="mx-2">•</span>
                                 <i data-lucide="users" class="w-4 h-4 mr-1"></i>
-                                <span>~300 personas</span>
-                                <span class="mx-2">•</span>
-                                <i data-lucide="map-pin" class="w-4 h-4 mr-1"></i>
-                                <span>manifestación</span>
+                                <span>2,000+ unidades</span>
                             </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-4 rounded-lg border-l-4 border-red-500 bg-red-800/50">
+                    <div class="flex justify-between items-start">
+                        <div class="flex-1">
+                            <div class="flex items-center mb-2">
+                                <h3 class="font-semibold text-lg">🛑 RUTA PRINCIPAL: Paseo de la Reforma</h3>
+                                <span class="ml-2 px-2 py-1 verified-badge text-white rounded-full text-xs font-medium">
+                                    BLOQUEADO
+                                </span>
+                            </div>
+                            <p class="text-red-100">Bloqueo total desde Monumento a la Revolución hasta Zócalo</p>
+                            <div class="flex items-center mt-2 text-sm text-red-200">
+                                <i data-lucide="map-pin" class="w-4 h-4 mr-1"></i>
+                                <span>Reforma completa</span>
+                                <span class="mx-2">•</span>
+                                <i data-lucide="alert-triangle" class="w-4 h-4 mr-1"></i>
+                                <span>Tránsito colapsado</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-4 rounded-lg border-l-4 border-red-500 bg-red-800/50">
+                    <div class="flex justify-between items-start">
+                        <div class="flex-1">
+                            <div class="flex items-center mb-2">
+                                <h3 class="font-semibold text-lg">⛔ AVENIDAS AFECTADAS</h3>
+                                <span class="ml-2 px-2 py-1 bg-red-700 text-white rounded-full text-xs font-medium">
+                    MULTIPLES
+                                </span>
+                            </div>
+                            <p class="text-red-100">Juárez, Balderas, Eje Central, Hidalgo, República - Cierres totales y parciales</p>
+                            <div class="flex items-center mt-2 text-sm text-red-200">
+                                <i data-lucide="navigation" class="w-4 h-4 mr-1"></i>
+                                <span>Centro Histórico + Cuauhtémoc</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-4 rounded-lg border-l-4 border-yellow-500 bg-yellow-900/30">
+                    <div class="flex justify-between items-start">
+                        <div class="flex-1">
+                            <div class="flex items-center mb-2">
+                                <h3 class="font-semibold text-lg">💡 RECOMENDACIONES URGENTES</h3>
+                            </div>
+                            <p class="text-yellow-100">• EVITAR VEHÍCULOS PARTICULARES • USAR TRANSPORTE ALTERNATIVO • RUTAS SUGERIDAS: Periférico, Circuito Interior, Viaducto • EVITAR ESTACIONES: Zócalo, Hidalgo</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Fuentes de datos verificadas -->
+        <!-- Fuentes oficiales -->
         <div class="card p-4 mt-8">
-            <h3 class="text-lg font-semibold mb-3 text-white">Fuentes Conectadas</h3>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
-                <div class="flex items-center space-x-2 p-3 bg-green-500/20 rounded-lg border border-green-500/30">
-                    <i data-lucide="shield-check" class="w-4 h-4 text-green-400"></i>
-                    <span>Secretaría de Seguridad CDMX</span>
+            <h3 class="text-lg font-semibold mb-3 text-white">FUENTES OFICIALES CONFIRMADAS</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                <div class="flex items-center space-x-2 p-3 bg-red-800/50 rounded-lg border border-red-600">
+                    <i data-lucide="shield-alert" class="w-4 h-4 text-red-300"></i>
+                    <span>Fuerza Amplia de Transportistas (FAT)</span>
                 </div>
-                <div class="flex items-center space-x-2 p-3 bg-green-500/20 rounded-lg border border-green-500/30">
-                    <i data-lucide="map-pin" class="w-4 h-4 text-green-400"></i>
-                    <span>C5 - Centro de Comando</span>
-                </div>
-                <div class="flex items-center space-x-2 p-3 bg-green-500/20 rounded-lg border border-green-500/30">
-                    <i data-lucide="activity" class="w-4 h-4 text-green-400"></i>
-                    <span>Movilidad CDMX</span>
+                <div class="flex items-center space-x-2 p-3 bg-red-800/50 rounded-lg border border-red-600">
+                    <i data-lucide="map-pin" class="w-4 h-4 text-red-300"></i>
+                    <span>C5 - Centro de Comando CDMX</span>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        // ===== CONFIGURACIÓN REAL =====
-        const ANGEL_COORDS = [19.4269, -99.1678];
-        const SEARCH_RADIUS = 1.5; // 1.5 km
+        // ===== CONFIGURACIÓN =====
+        const REFORMA_COORDS = [19.4269, -99.1678];
         let map;
         let markers = [];
-        let lastUpdateTime = null;
 
-        // ===== DATOS DE LA MANIFESTACIÓN =====
-        const protestData = {
-            active: true,
-            location: "Paseo de la Reforma - Ángel de la Independencia",
-            description: "Manifestación por derechos laborales - Aproximadamente 300 personas. Tráfico congestionado en ambas direcciones.",
-            coordinates: [19.4275, -99.1682], // Coordenadas cerca del Ángel
-            participants: "~300 personas",
-            startTime: "14:00",
-            source: "C5 CDMX",
-            severity: "high"
-        };
+        // ===== PUNTOS CRÍTICOS DE LA MEGAMARCHA =====
+        const criticalPoints = [
+            {
+                coords: [19.4362, -99.1544],
+                title: "🚨 INICIO: Monumento a la Revolución",
+                description: "Punto de concentración principal - Miles de transportistas",
+                type: "concentracion",
+                time: "14:00",
+                units: "2,000+"
+            },
+            {
+                coords: [19.4326, -99.1472],
+                title: "🛑 BLOQUEO: Reforma - Juárez",
+                description: "Intersección crítica - Bloqueo total",
+                type: "bloqueo",
+                severity: "high"
+            },
+            {
+                coords: [19.4320, -99.1400],
+                title: "⛔ BLOQUEO: Reforma - Eje Central",
+                description: "Acceso a Centro Histórico cerrado",
+                type: "bloqueo",
+                severity: "high"
+            },
+            {
+                coords: [19.4290, -99.1332],
+                title: "🎯 DESTINO: Zócalo Capitalino",
+                description: "Punto final de la megamarcha",
+                type: "destino",
+                time: "15:00+"
+            },
+            {
+                coords: [19.4285, -99.1500],
+                title: "🛑 AV. BALDERAS",
+                description: "Bloqueo confirmado - Tránsito paralizado",
+                type: "bloqueo",
+                severity: "medium"
+            },
+            {
+                coords: [19.4350, -99.1420],
+                title: "⛔ AV. HIDALGO",
+                description: "Cierre total reportado",
+                type: "bloqueo",
+                severity: "high"
+            }
+        ];
 
         // ===== INICIALIZACIÓN =====
         function initializeApp() {
@@ -365,39 +322,87 @@ cat > index.html << 'EOF'
             updateClock();
             setInterval(updateClock, 1000);
             updateLastUpdateTime();
-            updateProtestTime();
-            
-            // Mostrar estado del sistema con manifestación
-            showProtestActive();
         }
 
-        // ===== MOSTRAR MANIFESTACIÓN ACTIVA =====
-        function showProtestActive() {
-            // Actualizar tiempo de última verificación
-            lastUpdateTime = new Date();
-            updateLastUpdateTime();
+        function initMap() {
+            const mapElement = document.getElementById('map');
+            if (!mapElement) return;
             
-            // Mostrar que hay manifestación activa
-            updateStatus('Manifestación Activa - 2:00 PM', 'info');
-            
-            // Actualizar contadores
-            document.getElementById('reports-count').textContent = '1';
-            document.getElementById('total-count').textContent = '1';
-            document.getElementById('traffic-status').textContent = 'Congestionado';
-            document.getElementById('traffic-status').className = 'text-2xl font-bold traffic-high';
+            map = L.map('map').setView(REFORMA_COORDS, 15);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; OpenStreetMap contributors'
+            }).addTo(map);
+
+            // Área de monitoreo Reforma
+            L.circle(REFORMA_COORDS, {
+                color: '#ef4444',
+                fillColor: '#ef4444',
+                fillOpacity: 0.2,
+                radius: 1500
+            }).addTo(map).bindPopup('🚨 ZONA CRÍTICA - MEGAMARCHA ACTIVA');
+
+            // Agregar marcadores de puntos críticos
+            criticalPoints.forEach(point => {
+                let iconColor, iconHtml;
+                
+                if (point.type === "concentracion") {
+                    iconHtml = `
+                        <div style="background: #dc2626; width: 36px; height: 36px; border-radius: 50%; border: 4px solid white; box-shadow: 0 4px 12px rgba(220, 38, 38, 0.8); display: flex; align-items: center; justify-content: center; font-size: 18px;">
+                            🚨
+                        </div>
+                    `;
+                } else if (point.type === "bloqueo") {
+                    iconHtml = `
+                        <div style="background: #ef4444; width: 32px; height: 32px; border-radius: 50%; border: 3px solid white; box-shadow: 0 3px 8px rgba(239, 68, 68, 0.8); display: flex; align-items: center; justify-content: center; font-size: 16px;">
+                            🛑
+                        </div>
+                    `;
+                } else {
+                    iconHtml = `
+                        <div style="background: #991b1b; width: 32px; height: 32px; border-radius: 50%; border: 3px solid white; box-shadow: 0 3px 8px rgba(153, 27, 27, 0.8); display: flex; align-items: center; justify-content: center; font-size: 16px;">
+                            🎯
+                        </div>
+                    `;
+                }
+
+                const icon = L.divIcon({
+                    html: iconHtml,
+                    iconSize: point.type === "concentracion" ? [36, 36] : [32, 32],
+                    iconAnchor: point.type === "concentracion" ? [18, 18] : [16, 16]
+                });
+
+                const marker = L.marker(point.coords, { icon })
+                    .addTo(map)
+                    .bindPopup(`
+                        <div class="p-3 min-w-[280px] bg-red-900 text-white rounded-lg">
+                            <div class="flex items-center mb-2">
+                                <h3 class="font-bold text-lg">${point.title}</h3>
+                            </div>
+                            <p class="text-sm text-red-100 mb-3">${point.description}</p>
+                            <div class="space-y-1 text-xs">
+                                ${point.time ? `<div class="flex justify-between"><span class="font-semibold">Horario:</span><span>${point.time}</span></div>` : ''}
+                                ${point.units ? `<div class="flex justify-between"><span class="font-semibold">Unidades:</span><span>${point.units}</span></div>` : ''}
+                                ${point.severity ? `<div class="flex justify-between"><span class="font-semibold">Severidad:</span><span class="text-red-300 font-semibold">${point.severity === 'high' ? 'ALTA' : 'MEDIA'}</span></div>` : ''}
+                                <div class="flex justify-between">
+                                    <span class="font-semibold">Estado:</span>
+                                    <span class="text-red-300 font-semibold">ACTIVO</span>
+                                </div>
+                            </div>
+                        </div>
+                    `);
+
+                markers.push(marker);
+            });
         }
 
-        // ===== ACTUALIZAR TIEMPO DE LA MANIFESTACIÓN =====
-        function updateProtestTime() {
-            const protestTimeElement = document.getElementById('protest-time');
-            if (protestTimeElement) {
+        function updateClock() {
+            const clock = document.getElementById('real-time-clock');
+            if (clock) {
                 const now = new Date();
-                // Mostrar hora actual como tiempo transcurrido desde las 2 PM
-                protestTimeElement.textContent = `14:00 - En curso`;
+                clock.textContent = now.toLocaleTimeString('es-MX');
             }
         }
 
-        // ===== ACTUALIZAR TIEMPO DE ÚLTIMA VERIFICACIÓN =====
         function updateLastUpdateTime() {
             const lastUpdateElement = document.getElementById('last-update');
             if (lastUpdateElement) {
@@ -406,116 +411,10 @@ cat > index.html << 'EOF'
             }
         }
 
-        // ===== INTERFAZ =====
-        function updateStatus(message, type = 'success') {
-            const statusElement = document.getElementById('status-text');
-            const statusContainer = document.getElementById('status-container');
-            
-            if (statusElement) statusElement.textContent = message;
-            
-            const colors = {
-                loading: 'bg-yellow-500',
-                success: 'bg-green-500',
-                error: 'bg-red-500',
-                info: 'bg-orange-500'
-            };
-            
-            if (statusContainer) {
-                statusContainer.className = `inline-flex items-center px-3 py-1 rounded-full text-sm ${colors[type]} text-white ml-2`;
-            }
-        }
-
-        function initMap() {
-            const mapElement = document.getElementById('map');
-            if (!mapElement) return;
-            
-            map = L.map('map').setView(ANGEL_COORDS, 16);
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '&copy; OpenStreetMap contributors'
-            }).addTo(map);
-
-            // Círculo de 1.5 km
-            L.circle(ANGEL_COORDS, {
-                color: '#3b82f6',
-                fillColor: '#3b82f6',
-                fillOpacity: 0.1,
-                radius: SEARCH_RADIUS * 1000
-            }).addTo(map).bindPopup('Área de monitoreo: 1.5 km alrededor del Ángel');
-
-            // Marcador de la manifestación
-            const protestIcon = L.divIcon({
-                html: `
-                    <div style="background: #ef4444; width: 32px; height: 32px; border-radius: 50%; border: 4px solid white; box-shadow: 0 4px 12px rgba(239, 68, 68, 0.5); display: flex; align-items: center; justify-content: center;">
-                        <i data-lucide="users" style="color: white; width: 16px; height: 16px;"></i>
-                    </div>
-                `,
-                iconSize: [32, 32],
-                iconAnchor: [16, 16]
-            });
-
-            const protestMarker = L.marker(protestData.coordinates, { icon: protestIcon })
-                .addTo(map)
-                .bindPopup(`
-                    <div class="p-3 min-w-[280px]">
-                        <div class="flex items-center mb-2">
-                            <h3 class="font-bold text-lg">${protestData.location}</h3>
-                            <span class="ml-2 px-2 py-1 bg-red-500 text-white rounded-full text-xs font-medium">
-                                Manifestación
-                            </span>
-                        </div>
-                        <p class="text-sm text-gray-700 mb-3">${protestData.description}</p>
-                        <div class="space-y-1 text-xs">
-                            <div class="flex justify-between">
-                                <span class="font-semibold">Inicio:</span>
-                                <span>${protestData.startTime}</span>
-                            </div>
-                            <div class="flex justify-between">
-                                <span class="font-semibold">Participantes:</span>
-                                <span>${protestData.participants}</span>
-                            </div>
-                            <div class="flex justify-between">
-                                <span class="font-semibold">Fuente:</span>
-                                <span>${protestData.source}</span>
-                            </div>
-                            <div class="flex justify-between">
-                                <span class="font-semibold">Estado:</span>
-                                <span class="text-red-600 font-semibold">Activo</span>
-                            </div>
-                        </div>
-                    </div>
-                `);
-
-            markers.push(protestMarker);
-        }
-
-        function updateClock() {
-            const clock = document.getElementById('real-time-clock');
-            if (clock) {
-                clock.textContent = new Date().toLocaleTimeString('es-MX');
-            }
-        }
-
-        // ===== ACTUALIZAR AUTOMÁTICAMENTE =====
-        function autoUpdateSystem() {
-            // Actualizar tiempo de última verificación
-            lastUpdateTime = new Date();
-            updateLastUpdateTime();
-            updateProtestTime();
-            
-            // Programar próxima actualización en 3 minutos
-            setTimeout(autoUpdateSystem, 3 * 60 * 1000);
-        }
-
         // ===== INICIALIZACIÓN =====
         document.addEventListener('DOMContentLoaded', function() {
-            // Inicializar íconos
             lucide.createIcons();
-            
-            // Inicializar aplicación
             initializeApp();
-            
-            // Iniciar actualizaciones automáticas
-            setTimeout(autoUpdateSystem, 3 * 60 * 1000);
         });
 
     </script>
@@ -523,7 +422,7 @@ cat > index.html << 'EOF'
 </html>
 EOF
 
-# Hacer commit y push
-git add index.html
-git commit -m "Agregar manifestación activa a las 2 PM en Reforma"
-git push origin main
+echo "✅ Página actualizada con ALERTA MÁXIMA - Megamarcha Transportistas"
+echo "🚨 CÓDIGO ROJO ACTIVADO"
+echo "📅 Miércoles 29 Octubre 2025"
+echo "🕒 Horario crítico: 14:00 - 19:00 horas"
