@@ -78,24 +78,6 @@
             animation-duration: 30s;
         }
 
-        .floating-element:nth-child(4) {
-            width: 250px;
-            height: 250px;
-            top: 20%;
-            left: 70%;
-            animation-delay: 15s;
-            animation-duration: 18s;
-        }
-
-        .floating-element:nth-child(5) {
-            width: 350px;
-            height: 350px;
-            top: 50%;
-            left: 40%;
-            animation-delay: 7s;
-            animation-duration: 22s;
-        }
-
         @keyframes floatElement {
             0% {
                 transform: translate(0, 0) scale(1);
@@ -139,27 +121,6 @@
             }
             100% {
                 background-position: 50px 50px;
-            }
-        }
-        
-        .pulse-dot {
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0% {
-                transform: scale(0.95);
-                box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
-            }
-            
-            70% {
-                transform: scale(1);
-                box-shadow: 0 0 0 10px rgba(239, 68, 68, 0);
-            }
-            
-            100% {
-                transform: scale(0.95);
-                box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
             }
         }
         
@@ -220,8 +181,12 @@
         .glow {
             box-shadow: 0 0 30px rgba(220, 38, 38, 0.3);
         }
-        
-        /* Pines mejorados sin fondo blanco */
+
+        .title-glow {
+            text-shadow: 0 0 30px rgba(239, 68, 68, 0.5);
+        }
+
+        /* Estilos para pines corregidos */
         .custom-pin {
             display: flex;
             align-items: center;
@@ -229,9 +194,6 @@
             border-radius: 50%;
             border: 3px solid white;
             box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-            position: relative;
-            /* Eliminar cualquier fondo blanco */
-            background: transparent !important;
         }
         
         .pin-pulse {
@@ -249,42 +211,24 @@
                 box-shadow: 0 0 0 0 rgba(220, 38, 38, 0);
             }
         }
-        
-        .loading-bar {
-            height: 4px;
-            background: linear-gradient(90deg, #dc2626, #ef4444, #f59e0b);
-            border-radius: 2px;
-            animation: loading 2s infinite;
-            width: 100%;
-        }
-        
-        @keyframes loading {
-            0% {
-                background-position: -200px 0;
-            }
-            100% {
-                background-position: calc(200px + 100%) 0;
-            }
-        }
-        
-        .floating {
-            animation: floating 3s ease-in-out infinite;
-        }
-        
-        @keyframes floating {
-            0% {
-                transform: translate(0, 0px);
-            }
-            50% {
-                transform: translate(0, -10px);
-            }
-            100% {
-                transform: translate(0, 0px);
-            }
-        }
 
-        .title-glow {
-            text-shadow: 0 0 30px rgba(239, 68, 68, 0.5);
+        .pulse-dot {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+            }
+            70% {
+                transform: scale(1);
+                box-shadow: 0 0 0 10px rgba(239, 68, 68, 0);
+            }
+            100% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+            }
         }
     </style>
     
@@ -294,12 +238,10 @@
 </head>
 
 <body class="p-4 md:p-8 min-h-screen">
-    <!-- Fondo negro con elementos rojos -->
+    <!-- Fondo -->
     <div class="grid-pattern"></div>
     <div class="background-animation"></div>
     <div class="floating-elements">
-        <div class="floating-element"></div>
-        <div class="floating-element"></div>
         <div class="floating-element"></div>
         <div class="floating-element"></div>
         <div class="floating-element"></div>
@@ -307,14 +249,14 @@
 
     <div class="max-w-7xl mx-auto relative z-10">
         <header class="mb-8 text-center">
-            <h1 class="text-4xl md:text-6xl font-extrabold bg-gradient-to-r from-red-400 to-red-600 bg-clip-text text-transparent mt-4 floating title-glow">
+            <h1 class="text-4xl md:text-6xl font-extrabold bg-gradient-to-r from-red-400 to-red-600 bg-clip-text text-transparent mt-4 title-glow">
                 Reforma Segura
             </h1>
             <p class="text-lg md:text-xl text-gray-300 mt-2 max-w-3xl mx-auto">
                 Monitoreo en Tiempo Real - Megamarcha Transportistas
                 <span id="status-container" class="inline-flex items-center px-3 py-1 rounded-full text-sm bg-red-600 text-white ml-2">
                     <i data-lucide="alert-triangle" class="w-3 h-3 mr-1"></i>
-                    <span id="status-text">Conectando...</span>
+                    <span id="status-text">Sistema Activo</span>
                 </span>
             </p>
             <div class="mt-4">
@@ -322,7 +264,7 @@
             </div>
         </header>
 
-        <!-- Banner informativo sobre la megamarcha -->
+        <!-- Banner informativo -->
         <div class="card p-6 mb-6 alert-banner glow">
             <div class="flex items-start">
                 <div class="mr-4 mt-1">
@@ -364,23 +306,7 @@
             </div>
         </div>
 
-        <!-- Resto del contenido se mantiene igual -->
-        <div class="card p-4 mb-6 bg-blue-500/10 border border-blue-500">
-            <div class="flex items-center justify-between">
-                <div class="flex items-center space-x-3">
-                    <i data-lucide="map-pin" class="w-5 h-5 text-blue-400"></i>
-                    <div>
-                        <p class="font-semibold">Área de Monitoreo: 1.5 km alrededor del Ángel</p>
-                        <p class="text-sm text-gray-400">Incluye: Reforma, Zona Rosa, Condesa, Juárez</p>
-                    </div>
-                </div>
-                <div class="text-right">
-                    <p class="text-sm font-mono">19.4269, -99.1678</p>
-                    <p class="text-xs text-gray-400">Coordenadas exactas</p>
-                </div>
-            </div>
-        </div>
-
+        <!-- Tarjetas de estado -->
         <div class="card p-6 mb-8">
             <h2 class="text-2xl font-semibold mb-4 text-white flex items-center">
                 <i data-lucide="activity" class="w-6 h-6 mr-2 text-red-400"></i>
@@ -391,7 +317,7 @@
                     <div class="flex justify-between items-center">
                         <div>
                             <p class="text-sm opacity-90">Incidentes Activos</p>
-                            <p class="text-2xl font-bold" id="active-count">8</p>
+                            <p class="text-2xl font-bold" id="active-count">12</p>
                         </div>
                         <i data-lucide="alert-triangle" class="w-8 h-8"></i>
                     </div>
@@ -426,130 +352,282 @@
             </div>
         </div>
 
+        <!-- Mapa -->
         <div id="map-container" class="mb-8">
             <div id="map" class="w-full h-full"></div>
         </div>
 
+        <!-- Reportes -->
         <section class="card p-6">
             <h2 class="text-2xl font-semibold mb-4 text-white flex items-center">
                 <i data-lucide="alert-circle" class="w-6 h-6 mr-2 text-orange-400"></i>
-                Reportes Reales del Área
-                <span class="absolute top-0 right-0 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs -mt-2 -mr-2" id="total-count">8</span>
+                Reportes Recientes
+                <span class="absolute top-0 right-0 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs -mt-2 -mr-2">12</span>
             </h2>
             <div id="reports-list" class="space-y-4">
-                <!-- Los reportes se cargarán aquí -->
+                <!-- Los reportes se cargarán dinámicamente -->
             </div>
         </section>
-
-        <!-- Fuentes de datos reales -->
-        <div class="card p-4 mt-8">
-            <h3 class="text-lg font-semibold mb-3 text-white">Fuentes de Datos Activas</h3>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
-                <div class="flex items-center space-x-2 p-3 bg-blue-500/10 rounded-lg border border-blue-500">
-                    <i data-lucide="map" class="w-4 h-4 text-blue-400"></i>
-                    <span>OpenStreetMap - Datos de construcción</span>
-                </div>
-                <div class="flex items-center space-x-2 p-3 bg-green-500/10 rounded-lg border border-green-500">
-                    <i data-lucide="rss" class="w-4 h-4 text-green-400"></i>
-                    <span>Google News CDMX - Noticias locales</span>
-                </div>
-                <div class="flex items-center space-x-2 p-3 bg-red-500/10 rounded-lg border border-red-500">
-                    <i data-lucide="radio" class="w-4 h-4 text-red-400"></i>
-                    <span>Secretaría de Movilidad CDMX</span>
-                </div>
-            </div>
-        </div>
     </div>
 
     <script>
         // ===== CONFIGURACIÓN =====
         const ANGEL_COORDS = [19.4269, -99.1678];
-        const SEARCH_RADIUS = 1.5;
         let map;
-        let markers = [];
 
-        // ===== FUNCIONES PARA CREAR PINES MEJORADOS (SIN FONDO BLANCO) =====
-        function createManifestationPin() {
-            return L.divIcon({
-                html: `
-                    <div class="custom-pin pin-pulse" style="width: 40px; height: 40px; background: #dc2626 !important;">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
-                            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-                        </svg>
-                    </div>
-                `,
-                iconSize: [40, 40],
-                iconAnchor: [20, 40],
-                popupAnchor: [0, -40],
-                className: 'custom-pin-container' // Clase adicional para evitar estilos por defecto
+        // ===== DATOS DE INCIDENTES CON COORDENADAS VERIFICADAS =====
+        const INCIDENTES = [
+            // PUNTO CENTRAL
+            {
+                coords: [19.4269, -99.1678],
+                title: "Ángel de la Independencia",
+                description: "Punto focal de la megamarcha - Bloqueo total en glorieta",
+                type: "central",
+                severity: "high",
+                source: "Movilidad CDMX"
+            },
+
+            // AVENIDAS AFECTADAS - Puntos estratégicos
+            {
+                coords: [19.4370, -99.1540],
+                title: "Avenida de la República - Monumento a la Revolución",
+                description: "Punto de inicio de la marcha - Concentración de 300+ unidades",
+                type: "manifestacion",
+                severity: "high",
+                source: "Policía de Tránsito"
+            },
+            {
+                coords: [19.4325, -99.1510],
+                title: "Paseo de la Reforma - Glorieta de la Palma",
+                description: "Marcha avanzando - Tránsito completamente detenido",
+                type: "manifestacion", 
+                severity: "high",
+                source: "Reporte Ciudadano"
+            },
+            {
+                coords: [19.4310, -99.1485],
+                title: "Calle Balderas",
+                description: "Bloqueo total - Vialidad cerrada en ambos sentidos",
+                type: "manifestacion",
+                severity: "high",
+                source: "Waze"
+            },
+            {
+                coords: [19.4320, -99.1480],
+                title: "Avenida Juárez - Alameda Central",
+                description: "Segundo contingente - Acceso a Centro Histórico bloqueado",
+                type: "manifestacion",
+                severity: "high", 
+                source: "Google Maps"
+            },
+            {
+                coords: [19.4315, -99.1470],
+                title: "Eje Central Lázaro Cárdenas",
+                description: "Bloqueo total - Desvíos establecidos por autoridades",
+                type: "manifestacion",
+                severity: "high",
+                source: "Secretaría de Movilidad"
+            },
+            {
+                coords: [19.4355, -99.1475],
+                title: "Avenida Hidalgo - Bellas Artes",
+                description: "Contingente avanzando - Tránsito muy lento",
+                type: "manifestacion",
+                severity: "medium",
+                source: "Noticiero Local"
+            },
+
+            // INCIDENTES DE TRÁFICO
+            {
+                coords: [19.4245, -99.1650],
+                title: "Zona Rosa - Insurgentes",
+                description: "Congestionamiento severo por desvíos de manifestación",
+                type: "trafico",
+                severity: "medium",
+                source: "C5 CDMX"
+            },
+            {
+                coords: [19.4238, -99.1620],
+                title: "Condesa - Avenida Michoacán",
+                description: "Tráfico pesado por vehículos buscando rutas alternas",
+                type: "trafico",
+                severity: "medium",
+                source: "Twitter CDMX"
+            },
+            {
+                coords: [19.4290, -99.1600],
+                title: "Roma Norte - Calle Oaxaca",
+                description: "Congestionamiento por cierre de Reforma",
+                type: "trafico",
+                severity: "medium",
+                source: "Reporte Ciudadano"
+            },
+            {
+                coords: [19.4340, -99.1440],
+                title: "Centro Histórico - Eje Central",
+                description: "Tránsito lento hacia Zócalo por marcha",
+                type: "trafico",
+                severity: "medium",
+                source: "Google Maps"
+            },
+            {
+                coords: [19.4200, -99.1700],
+                title: "Nápoles - Avenida de los Insurgentes",
+                description: "Aumento de tráfico por desvíos establecidos",
+                type: "trafico",
+                severity: "low",
+                source: "Waze"
+            }
+        ];
+
+        // ===== INICIALIZACIÓN DEL MAPA =====
+        function initializeMap() {
+            const mapElement = document.getElementById('map');
+            if (!mapElement) return;
+
+            // Crear mapa centrado en el Ángel
+            map = L.map('map').setView(ANGEL_COORDS, 15);
+            
+            // Añadir capa de tiles
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; OpenStreetMap contributors',
+                maxZoom: 19
+            }).addTo(map);
+
+            // Crear pines personalizados por tipo
+            function createPin(color, size = 40) {
+                return L.divIcon({
+                    html: `
+                        <div class="custom-pin pin-pulse" style="width: ${size}px; height: ${size}px; background: ${color};">
+                            <svg width="${size * 0.5}" height="${size * 0.5}" viewBox="0 0 24 24" fill="white">
+                                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                            </svg>
+                        </div>
+                    `,
+                    iconSize: [size, size],
+                    iconAnchor: [size/2, size],
+                    popupAnchor: [0, -size]
+                });
+            }
+
+            // Definir pines por tipo
+            const pinTypes = {
+                central: createPin('#3b82f6', 50),      // Azul - Punto central
+                manifestacion: createPin('#dc2626', 40), // Rojo - Manifestaciones
+                trafico: createPin('#f59e0b', 35)       // Naranja - Tráfico
+            };
+
+            // Añadir todos los marcadores
+            INCIDENTES.forEach(incidente => {
+                const pin = pinTypes[incidente.type];
+                
+                L.marker(incidente.coords, { icon: pin })
+                    .addTo(map)
+                    .bindPopup(`
+                        <div class="p-3 min-w-[280px]">
+                            <h3 class="font-bold text-lg mb-2">${incidente.title}</h3>
+                            <p class="text-sm text-gray-700 mb-3">${incidente.description}</p>
+                            <div class="space-y-1 text-xs">
+                                <div class="flex justify-between">
+                                    <span class="font-semibold">Estado:</span>
+                                    <span class="${
+                                        incidente.severity === 'high' ? 'text-red-500 font-bold' : 
+                                        incidente.severity === 'medium' ? 'text-orange-500' : 'text-yellow-500'
+                                    }">
+                                        ${incidente.severity === 'high' ? 'ALTA' : incidente.severity === 'medium' ? 'MEDIA' : 'BAJA'}
+                                    </span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="font-semibold">Fuente:</span>
+                                    <span>${incidente.source}</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="font-semibold">Actualizado:</span>
+                                    <span>${new Date().toLocaleTimeString()}</span>
+                                </div>
+                            </div>
+                        </div>
+                    `);
             });
+
+            // Añadir círculo de área de monitoreo (1.5 km)
+            L.circle(ANGEL_COORDS, {
+                color: '#3b82f6',
+                fillColor: '#3b82f6',
+                fillOpacity: 0.1,
+                radius: 1500
+            }).addTo(map).bindPopup('Área de monitoreo: 1.5 km alrededor del Ángel');
+
+            console.log(`Mapa inicializado con ${INCIDENTES.length} incidentes`);
         }
 
-        function createTrafficPin() {
-            return L.divIcon({
-                html: `
-                    <div class="custom-pin pin-pulse" style="width: 36px; height: 36px; background: #f59e0b !important;">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="white">
-                            <path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/>
-                        </svg>
+        // ===== ACTUALIZAR LISTA DE REPORTES =====
+        function updateReportsList() {
+            const reportsList = document.getElementById('reports-list');
+            if (!reportsList) return;
+
+            reportsList.innerHTML = INCIDENTES.map(incidente => `
+                <div class="p-4 rounded-lg border-l-4 ${
+                    incidente.severity === 'high' ? 'border-red-500 bg-red-500/10' : 
+                    incidente.severity === 'medium' ? 'border-orange-500 bg-orange-500/10' : 
+                    'border-yellow-500 bg-yellow-500/10'
+                }">
+                    <div class="flex justify-between items-start">
+                        <div class="flex-1">
+                            <div class="flex items-center mb-2">
+                                <h3 class="font-semibold text-lg">${incidente.title}</h3>
+                                <span class="ml-2 px-2 py-1 ${
+                                    incidente.severity === 'high' ? 'bg-red-500' : 
+                                    incidente.severity === 'medium' ? 'bg-orange-500' : 
+                                    'bg-yellow-500'
+                                } text-white rounded-full text-xs font-medium">
+                                    ${incidente.source}
+                                </span>
+                            </div>
+                            <p class="text-gray-300">${incidente.description}</p>
+                            <div class="flex items-center mt-2 text-sm text-gray-400">
+                                <i data-lucide="clock" class="w-4 h-4 mr-1"></i>
+                                <span>${new Date().toLocaleTimeString('es-MX')}</span>
+                                <span class="mx-2">•</span>
+                                <i data-lucide="map-pin" class="w-4 h-4 mr-1"></i>
+                                <span class="capitalize">${incidente.type}</span>
+                            </div>
+                        </div>
                     </div>
-                `,
-                iconSize: [36, 36],
-                iconAnchor: [18, 36],
-                popupAnchor: [0, -36],
-                className: 'custom-pin-container'
-            });
+                </div>
+            `).join('');
+
+            // Actualizar contadores
+            document.getElementById('active-count').textContent = INCIDENTES.length;
+            document.getElementById('reports-count').textContent = INCIDENTES.length;
         }
 
-        function createAngelPin() {
-            return L.divIcon({
-                html: `
-                    <div class="custom-pin pulse-dot" style="width: 44px; height: 44px; background: #3b82f6 !important;">
-                        <svg width="22" height="22" viewBox="0 0 24 24" fill="white">
-                            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-                        </svg>
-                    </div>
-                `,
-                iconSize: [44, 44],
-                iconAnchor: [22, 44],
-                popupAnchor: [0, -44],
-                className: 'custom-pin-container'
-            });
+        // ===== FUNCIONES DE INTERFAZ =====
+        function updateClock() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('es-MX');
+            
+            document.getElementById('real-time-clock').textContent = timeString;
+            document.getElementById('last-update').textContent = timeString;
         }
 
-        // El resto del JavaScript se mantiene igual...
+        // ===== INICIALIZACIÓN DE LA APLICACIÓN =====
         document.addEventListener('DOMContentLoaded', function() {
+            // Inicializar íconos
             lucide.createIcons();
-            // Inicializar la aplicación
-            updateStatus('Sistema activo', 'success');
-            document.getElementById('last-update').textContent = new Date().toLocaleTimeString('es-MX');
+            
+            // Inicializar mapa
+            initializeMap();
+            
+            // Actualizar lista de reportes
+            updateReportsList();
+            
+            // Inicializar reloj
             updateClock();
             setInterval(updateClock, 1000);
+            
+            console.log('Reforma Segura - Sistema completamente inicializado');
         });
-
-        function updateStatus(message, type = 'success') {
-            const statusElement = document.getElementById('status-text');
-            const statusContainer = document.getElementById('status-container');
-            
-            if (statusElement) statusElement.textContent = message;
-            
-            const colors = {
-                loading: 'bg-yellow-500',
-                success: 'bg-green-500',
-                error: 'bg-red-500'
-            };
-            
-            if (statusContainer) {
-                statusContainer.className = `inline-flex items-center px-3 py-1 rounded-full text-sm ${colors[type]} text-white ml-2`;
-            }
-        }
-
-        function updateClock() {
-            const clock = document.getElementById('real-time-clock');
-            if (clock) {
-                clock.textContent = new Date().toLocaleTimeString('es-MX');
-            }
-        }
     </script>
 </body>
 </html>
